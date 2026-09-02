@@ -5,26 +5,34 @@ const token = localStorage.getItem("token");
 
 // Login page logic
 function login() {
-const email=document.getElementById("email").value;
-const password=document.getElementById("password").value;
-fetch(`${ SERVER_URL}/auth/login`,{method:"POST",
-    headers:{'content-type':'application/json'},
-    body:JSON.stringify({email,password})
-})
-.then(response=>
-{
-    if(!response.ok){
-        throw new Error("login failed")
-    }
-    return response.json();
-})
-.then(data=>{
-    localStorage.setItem("token",data.token);
-    window.location.href="todos.html";
-})
-.catch(error=>{
-    alert(error.message);
-})
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    fetch(`${SERVER_URL}/auth/login`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password })
+    })
+    .then(response => {
+        console.log("LOGIN STATUS:", response.status);
+        console.log("LOGIN URL:", response.url);
+
+        if (!response.ok) {
+            throw new Error("Login failed: " + response.status);
+        }
+
+        return response.json();
+    })
+    .then(data => {
+        localStorage.setItem("token", data.token);
+        window.location.href = "todos.html";
+    })
+    .catch(error => {
+        console.error(error);
+        alert(error.message);
+    });
 }
 
 // Register page logic
