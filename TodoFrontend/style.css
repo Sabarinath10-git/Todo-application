@@ -84,7 +84,7 @@ button {
     font-size: 1rem;
     cursor: pointer;
     transition: background 0.3s;
-    width: 100%;
+    width: auto;
     margin-top: 0.5rem;
 }
 
@@ -163,4 +163,13 @@ button:hover {
     color: #888;
     font-style: italic;
     margin-top: 1rem;
+}
+.todo-card {
+    display: flex;
+    align-items: center;
+}
+.delete-btn {
+    width: auto;
+    display: inline-block;
+    margin-left: auto;
 }
